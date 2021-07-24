@@ -10,9 +10,27 @@ public class InvertedIndex {
         String DIRECTORY_NAME = "SampleEnglishData\\EnglishData";
         DirectoryReader directoryReader = new DirectoryReader(DIRECTORY_NAME);
         extractWordsFromFiles(directoryReader);
-        for (Map.Entry<String,Set<String>> entry : tokenWords.entrySet())
-            System.out.println("Key = " + entry.getKey() +
-                    ", Value = " + entry.getValue());
+
+        String str="";
+        Scanner input=new Scanner(System.in);
+        do{
+            System.out.print("Type a word to search. If you want to exit, please type \"EXIT()\":");
+            str=input.nextLine();
+            if(!str.equals("EXIT()")){
+                if(tokenWords.containsKey(str)){
+                    Set<String> docList=tokenWords.get(str);
+                    System.out.println("This word exist in these documents:");
+                    int i=1;
+                    for (String docName : docList) {
+                        System.out.println(i+"- "+docName);
+                        i++;
+                    }
+                }else{
+                    System.out.println("No document found");
+
+                }
+            }
+        }while (!str.equals("EXIT()"));
     }
 
 
