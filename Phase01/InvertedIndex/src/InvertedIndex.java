@@ -6,31 +6,42 @@ import java.util.*;
 
 public class InvertedIndex {
     static Map<String, Set<String>> tokenWords = tokenWords = new HashMap<>();
+    final static Set<String> stopWords = new HashSet<>(Arrays.asList("their", "too", "only", "myself", "which", "those", "i", "after",
+            "few", "whom", "t", "being", "if", "theirs", "my", "against", "a", "by", "doing", "it", "how"
+            , "further", "while", "above", "both", "up", "to", "ours", "had", "she", "all", "no", "when", "at",
+            "any", "before", "them", "same", "and", "been", "have", "in", "will", "on", "does", "yourselves",
+            "then", "ourselves", "hers", "between", "yourself", "but", "again", "of", "most", "itself", "other",
+            "off", "is", "s", "am", "or", "who", "as", "from", "him", "each", "the", "themselves", "until", "below",
+            "your", "his", "through", "don", "nor", "me", "were", "her", "more", "himself", "this", "down", "should",
+            "our", "there", "about", "once", "during", "out", "very", "having", "with", "they", "own", "an", "be",
+            "some", "for", "do", "its", "yours", "such", "into", "are", "we", "these", "has", "just", "where", "was", "here",
+            "that", "because", "what", "over", "why", "so", "can", "did", "not", "now", "under", "he", "you", "herself", "than"));
+
     public static void main(String[] args) {
         String DIRECTORY_NAME = "SampleEnglishData\\EnglishData";
         DirectoryReader directoryReader = new DirectoryReader(DIRECTORY_NAME);
         extractWordsFromFiles(directoryReader);
 
-        String str="";
-        Scanner input=new Scanner(System.in);
-        do{
+        String str = "";
+        Scanner input = new Scanner(System.in);
+        do {
             System.out.print("Type a word to search. If you want to exit, please type \"EXIT()\":");
-            str=input.nextLine();
-            if(!str.equals("EXIT()")){
-                if(tokenWords.containsKey(str)){
-                    Set<String> docList=tokenWords.get(str);
+            str = input.nextLine();
+            if (!str.equals("EXIT()")) {
+                if (tokenWords.containsKey(str)) {
+                    Set<String> docList = tokenWords.get(str);
                     System.out.println("This word exist in these documents:");
-                    int i=1;
+                    int i = 1;
                     for (String docName : docList) {
-                        System.out.println(i+"- "+docName);
+                        System.out.println(i + "- " + docName);
                         i++;
                     }
-                }else{
+                } else {
                     System.out.println("No document found.");
 
                 }
             }
-        }while (!str.equals("EXIT()"));
+        } while (!str.equals("EXIT()"));
     }
 
 
@@ -46,15 +57,18 @@ public class InvertedIndex {
     private static void updateTokenWords(String fileName, String fileContent) {
         String[] words = fileContent.split("\\s+");
         for (String word : words) {
-            if (tokenWords.containsKey(word)) {
-                tokenWords.get(word).add(fileName);
-            } else {
-                tokenWords.put(word, new HashSet<String>() {{
-                    add(fileName);
-                }});
+            if (!InvertedIndex.stopWords.contains(word)) {
+                if (tokenWords.containsKey(word)) {
+                    tokenWords.get(word).add(fileName);
+                } else {
+                    tokenWords.put(word, new HashSet<String>() {{
+                        add(fileName);
+                    }});
+                }
             }
         }
     }
+
 }
 
 
