@@ -26,7 +26,7 @@ public class InvertedIndex {
                         i++;
                     }
                 }else{
-                    System.out.println("No document found");
+                    System.out.println("No document found.");
 
                 }
             }
