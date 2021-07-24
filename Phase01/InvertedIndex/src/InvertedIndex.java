@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.*;
 
 public class InvertedIndex {
+    static Set<String> plusSet;
+    static Set<String> minusSet;
+    static Set<String> normalSet;
     static Map<String, Set<String>> tokenWords = tokenWords = new HashMap<>();
     final static Set<String> stopWords = new HashSet<>(Arrays.asList("their", "too", "only", "myself", "which", "those", "i", "after",
             "few", "whom", "t", "being", "if", "theirs", "my", "against", "a", "by", "doing", "it", "how"
@@ -25,20 +28,17 @@ public class InvertedIndex {
         String str = "";
         Scanner input = new Scanner(System.in);
         do {
-            System.out.print("Type a word to search. If you want to exit, please type \"EXIT()\":");
+            System.out.print("What do you want to search? If you want to exit, please type \"EXIT()\":");
             str = input.nextLine();
-            if (!str.equals("EXIT()")) {
-                if (tokenWords.containsKey(str)) {
-                    Set<String> docList = tokenWords.get(str);
-                    System.out.println("This word exist in these documents:");
-                    int i = 1;
-                    for (String docName : docList) {
-                        System.out.println(i + "- " + docName);
-                        i++;
-                    }
-                } else {
-                    System.out.println("No document found.");
 
+            if (!str.equals("EXIT()")) {
+                List<String> filteredDocsList = filterDocs(str.toLowerCase());
+                if (filteredDocsList.size() == 0) {
+                    System.out.println("No document found.");
+                } else {
+                    for (int i = 0; i < filteredDocsList.size(); i++) {
+                        System.out.println((i + 1) + "- " + filteredDocsList.get(i));
+                    }
                 }
             }
         } while (!str.equals("EXIT()"));
@@ -67,6 +67,50 @@ public class InvertedIndex {
                 }
             }
         }
+    }
+
+    private static List<String> filterDocs(String query) {
+        String[] queryWords = query.split("\\s+");
+        plusSet = new HashSet<>();
+        minusSet = new HashSet<>();
+        normalSet = new HashSet<>();
+        for (int i = 0; i < queryWords.length; i++) {
+            if (queryWords[i].startsWith("+")) {
+                plusSet.add(queryWords[i].substring(1));
+            } else if (queryWords[i].startsWith("-")) {
+                minusSet.add(queryWords[i].substring(1));
+            } else {
+                normalSet.add(queryWords[i]);
+            }
+        }
+
+        List<String> mustBeDocsList = new ArrayList<>();
+        List<String> mustNotBeDocsList = new ArrayList<>();
+        List<String> shouldBeDocsList = new ArrayList<>();
+
+        for (String word : plusSet) {
+            if (tokenWords.containsKey(word)) {
+                mustBeDocsList.addAll(tokenWords.get(word));
+            }
+        }
+
+        for (String word : minusSet) {
+            if (tokenWords.containsKey(word)) {
+                mustNotBeDocsList.addAll(tokenWords.get(word));
+            }
+        }
+
+        for (String word : normalSet) {
+            if (tokenWords.containsKey(word)) {
+                shouldBeDocsList.addAll(tokenWords.get(word));
+            }
+        }
+
+        List<String> output = new ArrayList<>();
+        output.addAll(mustBeDocsList);
+        output.addAll(shouldBeDocsList);
+        output.removeAll(mustNotBeDocsList);
+        return output;
     }
 
 }
