@@ -25,7 +25,7 @@ public class InvertedIndex {
         }
     }
 
-    private  void updateTokenWords(Document document) {
+    private void updateTokenWords(Document document) {
         String[] words = document.getContent().split("\\s+");
         for (String word : words) {
             if (!InvertedIndex.stopWords.contains(word)) {
@@ -63,13 +63,10 @@ public class InvertedIndex {
     }
 
     private List<String> getOutput(Query query) {
-        List<String> mustBeDocsList = getAllValidDocs(query.getMustBeDocsList());
-        List<String> mustNotBeDocsList = getAllValidDocs(query.getMustNotBeDocsList());
-        List<String> shouldBeDocsList = getAllValidDocs(query.getShouldBeDocsList());
         List<String> output = new ArrayList<>();
-        output.addAll(mustBeDocsList);
-        output.addAll(shouldBeDocsList);
-        output.removeAll(mustNotBeDocsList);
+        output.addAll(getAllValidDocs(query.getMustBeDocsList()));
+        output.addAll(getAllValidDocs(query.getShouldBeDocsList()));
+        output.removeAll(getAllValidDocs(query.getMustNotBeDocsList()));
         return output;
     }
 
@@ -81,6 +78,17 @@ public class InvertedIndex {
             }
         }
         return result;
+    }
+
+    public void printList(List<String> filteredDocsList) {
+        Log log = new Log();
+        if (filteredDocsList.size() == 0) {
+            log.log("No document found.");
+        } else {
+            for (int i = 0; i < filteredDocsList.size(); i++) {
+                System.out.println((i + 1) + " - " + filteredDocsList.get(i));
+            }
+        }
     }
 
 }
