@@ -1,15 +1,9 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 public class InvertedIndex {
-    static Set<String> plusSet;
-    static Set<String> minusSet;
-    static Set<String> normalSet;
-    static Map<String, Set<String>> tokenWords = tokenWords = new HashMap<>();
-    final static Set<String> stopWords = new HashSet<>(Arrays.asList("their", "too", "only", "myself", "which", "those", "i", "after",
+    private static Map<String, Set<String>> tokenWords = new HashMap<>();
+    private final static Set<String> stopWords = new HashSet<>(Arrays.asList("their", "too", "only", "myself", "which", "those", "i", "after",
             "few", "whom", "t", "being", "if", "theirs", "my", "against", "a", "by", "doing", "it", "how"
             , "further", "while", "above", "both", "up", "to", "ours", "had", "she", "all", "no", "when", "at",
             "any", "before", "them", "same", "and", "been", "have", "in", "will", "on", "does", "yourselves",
@@ -20,92 +14,58 @@ public class InvertedIndex {
             "some", "for", "do", "its", "yours", "such", "into", "are", "we", "these", "has", "just", "where", "was", "here",
             "that", "because", "what", "over", "why", "so", "can", "did", "not", "now", "under", "he", "you", "herself", "than"));
 
-    public static void main(String[] args) {
-        String DIRECTORY_NAME = "SampleEnglishData\\EnglishData";
-        DirectoryReader directoryReader = new DirectoryReader(DIRECTORY_NAME);
-        extractWordsFromFiles(directoryReader);
 
-        String str = "";
-        Scanner input = new Scanner(System.in);
-        do {
-            System.out.print("What do you want to search? If you want to exit, please type \"EXIT()\":");
-            str = input.nextLine();
-
-            if (!str.equals("EXIT()")) {
-                List<String> filteredDocsList = filterDocs(str.toLowerCase());
-                if (filteredDocsList.size() == 0) {
-                    System.out.println("No document found.");
-                } else {
-                    for (int i = 0; i < filteredDocsList.size(); i++) {
-                        System.out.println((i + 1) + "- " + filteredDocsList.get(i));
-                    }
-                }
-            }
-        } while (!str.equals("EXIT()"));
-    }
-
-
-    private static void extractWordsFromFiles(DirectoryReader directoryReader) {
+    void extractWordsFromFiles(DirectoryReader directoryReader) {
         File[] files = directoryReader.getFilesList();
         for (File file : files) {
             String fileName = file.getName();
             String fileContent = directoryReader.readFileContent(file);
-            updateTokenWords(fileName, fileContent);
+            Document document = new Document(fileName, fileContent);
+            updateTokenWords(document);
         }
     }
 
-    private static void updateTokenWords(String fileName, String fileContent) {
-        String[] words = fileContent.split("\\s+");
+    private  void updateTokenWords(Document document) {
+        String[] words = document.getContent().split("\\s+");
         for (String word : words) {
             if (!InvertedIndex.stopWords.contains(word)) {
                 if (tokenWords.containsKey(word)) {
-                    tokenWords.get(word).add(fileName);
+                    tokenWords.get(word).add(document.getName());
                 } else {
-                    tokenWords.put(word, new HashSet<String>() {{
-                        add(fileName);
+                    tokenWords.put(word, new HashSet<>() {{
+                        add(document.getName());
                     }});
                 }
             }
         }
     }
 
-    private static List<String> filterDocs(String query) {
-        String[] queryWords = query.split("\\s+");
-        plusSet = new HashSet<>();
-        minusSet = new HashSet<>();
-        normalSet = new HashSet<>();
-        for (int i = 0; i < queryWords.length; i++) {
-            if (queryWords[i].startsWith("+")) {
-                plusSet.add(queryWords[i].substring(1));
-            } else if (queryWords[i].startsWith("-")) {
-                minusSet.add(queryWords[i].substring(1));
-            } else {
-                normalSet.add(queryWords[i]);
+    List<String> filterDocs(String queryString) {
+        String[] queryWords = queryString.split("\\s+");
+        Set<String> plusSet = new HashSet<>();
+        Set<String> minusSet = new HashSet<>();
+        Set<String> normalSet = new HashSet<>();
+        for (String queryWord : queryWords) {
+            switch (queryWord.charAt(0)) {
+                case '+':
+                    plusSet.add(queryWord.substring(1));
+                    break;
+                case '-':
+                    minusSet.add(queryWord.substring(1));
+                    break;
+                default:
+                    normalSet.add(queryWord);
             }
+
         }
+        Query query = new Query(plusSet, minusSet, normalSet);
+        return getOutput(query);
+    }
 
-        List<String> mustBeDocsList = new ArrayList<>();
-        List<String> mustNotBeDocsList = new ArrayList<>();
-        List<String> shouldBeDocsList = new ArrayList<>();
-
-        for (String word : plusSet) {
-            if (tokenWords.containsKey(word)) {
-                mustBeDocsList.addAll(tokenWords.get(word));
-            }
-        }
-
-        for (String word : minusSet) {
-            if (tokenWords.containsKey(word)) {
-                mustNotBeDocsList.addAll(tokenWords.get(word));
-            }
-        }
-
-        for (String word : normalSet) {
-            if (tokenWords.containsKey(word)) {
-                shouldBeDocsList.addAll(tokenWords.get(word));
-            }
-        }
-
+    private List<String> getOutput(Query query) {
+        List<String> mustBeDocsList = getAllValidDocs(query.getMustBeDocsList());
+        List<String> mustNotBeDocsList = getAllValidDocs(query.getMustNotBeDocsList());
+        List<String> shouldBeDocsList = getAllValidDocs(query.getShouldBeDocsList());
         List<String> output = new ArrayList<>();
         output.addAll(mustBeDocsList);
         output.addAll(shouldBeDocsList);
@@ -113,35 +73,17 @@ public class InvertedIndex {
         return output;
     }
 
-}
-
-
-class DirectoryReader {
-    private File directory;
-
-    public DirectoryReader(String directoryName) {
-        this.directory = new File(directoryName);
-    }
-
-    String readFileContent(File file) {
-        StringBuilder fileContent = new StringBuilder();
-        try {
-            FileReader reader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader((reader));
-            int ch;
-            while ((ch = bufferedReader.read()) != -1) {
-                fileContent.append((char) ch);
+    private List<String> getAllValidDocs(Set<String> normalSet) {
+        List<String> result = new ArrayList<>();
+        for (String word : normalSet) {
+            if (tokenWords.containsKey(word)) {
+                result.addAll(tokenWords.get(word));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return fileContent.toString().toLowerCase();
-
+        return result;
     }
-
-    File[] getFilesList() {
-        return directory.listFiles();
-    }
-
 
 }
+
+
+
