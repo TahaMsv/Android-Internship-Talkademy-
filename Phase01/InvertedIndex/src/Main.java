@@ -28,7 +28,7 @@ public class Main {
             System.out.println("No document found.");
         } else {
             for (int i = 0; i < filteredDocsList.size(); i++) {
-                System.out.println((i + 1) + "- " + filteredDocsList.get(i));
+                System.out.println((i + 1) + " - " + filteredDocsList.get(i));
             }
         }
     }
