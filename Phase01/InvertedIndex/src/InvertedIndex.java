@@ -31,7 +31,7 @@ public class InvertedIndex {
         }
     }
 
-    private void updateTokenWords(DocumentModel document) {
+    void updateTokenWords(DocumentModel document) {
         String[] words;
         if (document.getContent() != null) {
             words = document.getContent().split("\\s+");
@@ -71,16 +71,18 @@ public class InvertedIndex {
         return getOutput(query);
     }
 
-    private List<String> getOutput(Query query) {
-        List<String> output = new ArrayList<>();
+    List<String> getOutput(Query query) {
+        Set<String> output = new HashSet<>();
         output.addAll(getAllValidDocs(query.getMustBeDocsList()));
         output.addAll(getAllValidDocs(query.getShouldBeDocsList()));
         output.removeAll(getAllValidDocs(query.getMustNotBeDocsList()));
-        return output;
+        List<String> outputToList = new ArrayList<>();
+        outputToList.addAll(output);
+        return outputToList;
     }
 
-    private List<String> getAllValidDocs(Set<String> normalSet) {
-        List<String> result = new ArrayList<>();
+    Set<String> getAllValidDocs(Set<String> normalSet) {
+        Set<String> result = new HashSet<>();
         for (String word : normalSet) {
             if (tokenWords.containsKey(word)) {
                 result.addAll(tokenWords.get(word));
@@ -89,8 +91,12 @@ public class InvertedIndex {
         return result;
     }
 
-    public static Set<String> getStopWords() {
+    public Set<String> getStopWords() {
         return stopWords;
+    }
+
+    public Map<String, Set<String>> getTokenWords() {
+        return tokenWords;
     }
 }
 
