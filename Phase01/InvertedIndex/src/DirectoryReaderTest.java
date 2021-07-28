@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class DirectoryReaderTest {
 
@@ -43,6 +44,7 @@ public class DirectoryReaderTest {
         file3.delete();
     }
 
+
     @Test
     public void readFileContentTest() {
         String result = directoryReader.readFileContent(file);
@@ -64,7 +66,6 @@ public class DirectoryReaderTest {
         File[] result = directoryReader.getFilesList();
         int expected = 2;
         assertEquals(expected, result.length);
-
     }
 
     @Test
@@ -74,13 +75,14 @@ public class DirectoryReaderTest {
 
     }
 
-//    @Test
-//    public void getDirectoryTest() {
-//        File result = directoryReader.getDirectory();
-//        File expected = rootDirectory;
-//        assertEquals(expected, result);
-//
-//    }
+    @Test
+    public void getDirectoryTest() {
+        directoryReader.setDirectory(rootDirectory);
+        File result = directoryReader.getDirectory();
+        File expected = rootDirectory;
+        assertEquals(expected, result);
+
+    }
 
     @After
     public void tearDown() throws IOException {
