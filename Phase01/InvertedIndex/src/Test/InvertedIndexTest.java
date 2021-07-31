@@ -1,3 +1,5 @@
+package Test;
+
 import SerachEngin.DirectoryReader;
 import SerachEngin.DocumentModel;
 import SerachEngin.InvertedIndex;

@@ -1,3 +1,5 @@
+package Test;
+
 import SerachEngin.DirectoryReader;
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class DirectoryReaderTest {
 
@@ -18,7 +19,6 @@ public class DirectoryReaderTest {
     File rootDirectory;
     File file;
     File file2;
-    File file3;
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
@@ -28,7 +28,6 @@ public class DirectoryReaderTest {
         rootDirectory = folder.newFolder("root");
         file = new File(rootDirectory, "testFile1.txt");
         file2 = new File(rootDirectory, "testFile2.txt");
-        file3 = new File(rootDirectory, "testFile3.txt");
 
         if (!file2.exists()) {
             file2.createNewFile();
@@ -42,7 +41,6 @@ public class DirectoryReaderTest {
         fileWriter2.write("another test");
         fileWriter.close();
         fileWriter2.close();
-        file3.delete();
     }
 
 
@@ -52,9 +50,6 @@ public class DirectoryReaderTest {
         String expected = "this is a test";
         assertEquals(expected, result);
 
-        result = directoryReader.readFileContent(file3);
-        expected = "";
-        assertEquals(expected, result);
 
         result = directoryReader.readFileContent(file2);
         expected = "another test";

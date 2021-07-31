@@ -57,7 +57,7 @@
       <recent name="D:\Mobile Development\Android\Android_Internship-Talkademy-\Phase01\InvertedIndex" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="JUnit.All in InvertedIndex">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SerachEngin.Main" />
       <module name="InvertedIndex" />
@@ -108,9 +108,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in InvertedIndex" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.All in InvertedIndex" />
         <item itemvalue="JUnit.LogUtilTest.givenSystemOutRedirection_whenInvokePrintln_thenOutputCaptorSuccess" />
         <item itemvalue="JUnit.LogUtilTest.logTotStringTest" />
       </list>
@@ -143,7 +143,8 @@
       <workItem from="1627491496961" duration="12379000" />
       <workItem from="1627512113750" duration="3153000" />
       <workItem from="1627661260118" duration="43000" />
-      <workItem from="1627707465091" duration="1830000" />
+      <workItem from="1627707465091" duration="2880000" />
+      <workItem from="1627759883424" duration="845000" />
     </task>
     <task id="LOCAL-00001" summary="Simple searcher added.">
       <created>1627145083372</created>
@@ -200,6 +201,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="679" y="206" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1627502316916" />
+    <state x="566" y="297" width="403" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1627767045390">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="566" y="297" width="403" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1627767045390" />
     <state x="219" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1627452551166">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -212,22 +217,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1627488121823" />
-    <state width="1493" height="218" key="GridCell.Tab.0.bottom" timestamp="1627709239027">
+    <state width="1493" height="388" key="GridCell.Tab.0.bottom" timestamp="1627767075160">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1627709239027" />
-    <state width="1493" height="218" key="GridCell.Tab.0.center" timestamp="1627709239027">
+    <state width="1493" height="388" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1627767075160" />
+    <state width="1493" height="388" key="GridCell.Tab.0.center" timestamp="1627767075159">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1627709239027" />
-    <state width="1493" height="218" key="GridCell.Tab.0.left" timestamp="1627709239026">
+    <state width="1493" height="388" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1627767075159" />
+    <state width="1493" height="388" key="GridCell.Tab.0.left" timestamp="1627767075159">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1627709239026" />
-    <state width="1493" height="218" key="GridCell.Tab.0.right" timestamp="1627709239027">
+    <state width="1493" height="388" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1627767075159" />
+    <state width="1493" height="388" key="GridCell.Tab.0.right" timestamp="1627767075160">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="218" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1627709239027" />
+    <state width="1493" height="388" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1627767075160" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1627153679597">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -248,10 +253,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1627189940598" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1627661259800">
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1627766627305">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1627661259800" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1627766627305" />
     <state x="498" y="305" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1627452782846">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -277,6 +282,6 @@
     <SUITE FILE_PATH="coverage/InvertedIndex$LogUtilTest_givenSystemOutRedirection_whenInvokePrintln_thenOutputCaptorSuccess.ic" NAME="LogUtilTest.givenSystemOutRedirection_whenInvokePrintln_thenOutputCaptorSuccess Coverage Results" MODIFIED="1627507535119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/InvertedIndex$Main.ic" NAME="Main Coverage Results" MODIFIED="1627502374672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/InvertedIndex$InvertedIndexTest.ic" NAME="InvertedIndexTest Coverage Results" MODIFIED="1627502485631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/InvertedIndex$All_in_InvertedIndex.ic" NAME="All in InvertedIndex Coverage Results" MODIFIED="1627515202524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/InvertedIndex$All_in_InvertedIndex.ic" NAME="All in InvertedIndex Coverage Results" MODIFIED="1627766970613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

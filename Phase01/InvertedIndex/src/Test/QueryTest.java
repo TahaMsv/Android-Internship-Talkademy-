@@ -1,3 +1,5 @@
+package Test;
+
 import SerachEngin.Query;
 import org.junit.Before;
 import org.junit.Test;
