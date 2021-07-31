@@ -1,3 +1,4 @@
+import SerachEngin.DocumentModel;
 import org.junit.Before;
 import org.junit.Test;
 

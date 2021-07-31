@@ -1,3 +1,5 @@
+package SerachEngin;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,5 +23,4 @@ public class Main {
             }
         } while (!EXIT_COMMAND.equals(str));
     }
-
 }

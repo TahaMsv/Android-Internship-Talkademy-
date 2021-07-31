@@ -1,3 +1,7 @@
+import SerachEngin.DirectoryReader;
+import SerachEngin.DocumentModel;
+import SerachEngin.InvertedIndex;
+import SerachEngin.Query;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

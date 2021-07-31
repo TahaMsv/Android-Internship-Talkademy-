@@ -1,3 +1,5 @@
+package SerachEngin;
+
 public class DocumentModel {
     private String name;
     private String content;

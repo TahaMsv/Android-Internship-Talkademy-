@@ -1,3 +1,5 @@
+package SerachEngin;
+
 import java.io.File;
 import java.util.*;
 
@@ -17,7 +19,7 @@ public class InvertedIndex {
             "that", "because", "what", "over", "why", "so", "can", "did", "not", "now", "under", "he", "you", "herself", "than"));
 
 
-    void extractWordsFromFiles(DirectoryReader directoryReader) {
+    public void extractWordsFromFiles(DirectoryReader directoryReader) {
         if (directoryReader != null) {
             File[] files = directoryReader.getFilesList();
             if (files != null) {
@@ -31,7 +33,7 @@ public class InvertedIndex {
         }
     }
 
-    void updateTokenWords(DocumentModel document) {
+    public void updateTokenWords(DocumentModel document) {
         String[] words;
         if (document.getContent() != null) {
             words = document.getContent().split("\\s+");
@@ -49,7 +51,7 @@ public class InvertedIndex {
         }
     }
 
-    List<String> filterDocs(String queryString) {
+    public List<String> filterDocs(String queryString) {
         String[] queryWords = queryString.split("\\s+");
         Set<String> plusSet = new HashSet<>();
         Set<String> minusSet = new HashSet<>();
@@ -71,7 +73,7 @@ public class InvertedIndex {
         return getOutput(query);
     }
 
-    List<String> getOutput(Query query) {
+    public List<String> getOutput(Query query) {
         Set<String> output = new HashSet<>();
         output.addAll(getAllValidDocs(query.getMustBeDocsList()));
         output.addAll(getAllValidDocs(query.getShouldBeDocsList()));
@@ -81,7 +83,7 @@ public class InvertedIndex {
         return outputToList;
     }
 
-    Set<String> getAllValidDocs(Set<String> normalSet) {
+    public Set<String> getAllValidDocs(Set<String> normalSet) {
         Set<String> result = new HashSet<>();
         for (String word : normalSet) {
             if (tokenWords.containsKey(word)) {
