@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -6,11 +8,11 @@ import java.io.IOException;
 class DirectoryReader {
     private File directory;
 
-    public DirectoryReader(String directoryName) {
+    public DirectoryReader(@NotNull String directoryName) {
         this.directory = new File(directoryName);
     }
 
-    String readFileContent(File file) {
+    String readFileContent(@NotNull File file) {
         StringBuilder fileContent = new StringBuilder();
         try {
             FileReader reader = new FileReader(file);
@@ -27,6 +29,9 @@ class DirectoryReader {
     }
 
     File[] getFilesList() {
+        if (directory == null || directory.listFiles() == null) {
+            return null;
+        }
         return directory.listFiles();
     }
 

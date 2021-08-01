@@ -1,8 +1,8 @@
-public class Document {
+public class DocumentModel {
     private String name;
     private String content;
 
-    public Document(String name, String content) {
+    public DocumentModel(String name, String content) {
         this.name = name;
         this.content = content;
     }

@@ -6,7 +6,6 @@ public class Main {
     private static final String EXIT_COMMAND = "EXIT()";
 
     public static void main(String[] args) {
-
         DirectoryReader directoryReader = new DirectoryReader(DIRECTORY_NAME);
         InvertedIndex invertedIndex = new InvertedIndex();
         invertedIndex.extractWordsFromFiles(directoryReader);
@@ -14,22 +13,13 @@ public class Main {
         String str = "";
         Scanner input = new Scanner(System.in);
         do {
-            System.out.print("What do you want to search? If you want to exit, please type \"" + EXIT_COMMAND + "\":");
+            LogUtil.logString("What do you want to search? If you want to exit, please type \"" + EXIT_COMMAND + "\":");
             str = input.nextLine();
-            if (!str.equals(EXIT_COMMAND)) {
+            if (str != null && !EXIT_COMMAND.equals(str)) {
                 List<String> filteredDocsList = invertedIndex.filterDocs(str.toLowerCase());
-                printList(filteredDocsList);
+                LogUtil.logDocList(filteredDocsList);
             }
-        } while (!str.equals(EXIT_COMMAND));
+        } while (!EXIT_COMMAND.equals(str));
     }
 
-    private static void printList(List<String> filteredDocsList) {
-        if (filteredDocsList.size() == 0) {
-            System.out.println("No document found.");
-        } else {
-            for (int i = 0; i < filteredDocsList.size(); i++) {
-                System.out.println((i + 1) + "- " + filteredDocsList.get(i));
-            }
-        }
-    }
 }

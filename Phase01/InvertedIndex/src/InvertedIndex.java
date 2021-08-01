@@ -3,6 +3,8 @@ import java.util.*;
 
 public class InvertedIndex {
     private static Map<String, Set<String>> tokenWords = new HashMap<>();
+    private final static char PLUS_SIGN = '+';
+    private final static char MINUS_SIGN = '-';
     private final static Set<String> stopWords = new HashSet<>(Arrays.asList("their", "too", "only", "myself", "which", "those", "i", "after",
             "few", "whom", "t", "being", "if", "theirs", "my", "against", "a", "by", "doing", "it", "how"
             , "further", "while", "above", "both", "up", "to", "ours", "had", "she", "all", "no", "when", "at",
@@ -16,25 +18,32 @@ public class InvertedIndex {
 
 
     void extractWordsFromFiles(DirectoryReader directoryReader) {
-        File[] files = directoryReader.getFilesList();
-        for (File file : files) {
-            String fileName = file.getName();
-            String fileContent = directoryReader.readFileContent(file);
-            Document document = new Document(fileName, fileContent);
-            updateTokenWords(document);
+        if (directoryReader != null) {
+            File[] files = directoryReader.getFilesList();
+            if (files != null) {
+                for (File file : files) {
+                    String fileName = file.getName();
+                    String fileContent = directoryReader.readFileContent(file);
+                    DocumentModel document = new DocumentModel(fileName, fileContent);
+                    updateTokenWords(document);
+                }
+            }
         }
     }
 
-    private  void updateTokenWords(Document document) {
-        String[] words = document.getContent().split("\\s+");
-        for (String word : words) {
-            if (!InvertedIndex.stopWords.contains(word)) {
-                if (tokenWords.containsKey(word)) {
-                    tokenWords.get(word).add(document.getName());
-                } else {
-                    tokenWords.put(word, new HashSet<>() {{
-                        add(document.getName());
-                    }});
+    private void updateTokenWords(DocumentModel document) {
+        String[] words;
+        if (document.getContent() != null) {
+            words = document.getContent().split("\\s+");
+            for (String word : words) {
+                if (!getStopWords().contains(word)) {
+                    if (tokenWords.containsKey(word)) {
+                        tokenWords.get(word).add(document.getName());
+                    } else {
+                        tokenWords.put(word, new HashSet<>() {{
+                            add(document.getName());
+                        }});
+                    }
                 }
             }
         }
@@ -47,10 +56,10 @@ public class InvertedIndex {
         Set<String> normalSet = new HashSet<>();
         for (String queryWord : queryWords) {
             switch (queryWord.charAt(0)) {
-                case '+':
+                case PLUS_SIGN:
                     plusSet.add(queryWord.substring(1));
                     break;
-                case '-':
+                case MINUS_SIGN:
                     minusSet.add(queryWord.substring(1));
                     break;
                 default:
@@ -63,13 +72,10 @@ public class InvertedIndex {
     }
 
     private List<String> getOutput(Query query) {
-        List<String> mustBeDocsList = getAllValidDocs(query.getMustBeDocsList());
-        List<String> mustNotBeDocsList = getAllValidDocs(query.getMustNotBeDocsList());
-        List<String> shouldBeDocsList = getAllValidDocs(query.getShouldBeDocsList());
         List<String> output = new ArrayList<>();
-        output.addAll(mustBeDocsList);
-        output.addAll(shouldBeDocsList);
-        output.removeAll(mustNotBeDocsList);
+        output.addAll(getAllValidDocs(query.getMustBeDocsList()));
+        output.addAll(getAllValidDocs(query.getShouldBeDocsList()));
+        output.removeAll(getAllValidDocs(query.getMustNotBeDocsList()));
         return output;
     }
 
@@ -83,6 +89,9 @@ public class InvertedIndex {
         return result;
     }
 
+    public static Set<String> getStopWords() {
+        return stopWords;
+    }
 }
 
 
