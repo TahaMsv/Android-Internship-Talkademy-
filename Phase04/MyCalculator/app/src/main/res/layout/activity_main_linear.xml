@@ -1,8 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="156dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="276dp"
+        android:text="8.0 - 5.0:"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="68dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="15dp"
+        android:text="3"
+        android:layout_marginLeft="35dp"
+        android:textColor="#000000"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="105dp"
+        >
+
+        <Button
+            android:id="@+id/buttonDEL"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="DEL" />
+
+        <Button
+            android:id="@+id/buttonRESET"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="RESET" />
+
+        <Button
+            android:id="@+id/buttonOFF"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="OFF" />
+
+        <Button
+            android:id="@+id/buttonX"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="X" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/buttonDIVIDE"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="÷" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/buttonMINUS"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="-" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="8" />
+
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="9" />
+
+
+        <Button
+            android:id="@+id/buttonPLUS"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="+" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button00"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="00" />
+
+
+        <Button
+            android:id="@+id/button0"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/button."
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/lightBlue"
+            android:text="." />
+
+        <Button
+            android:id="@+id/buttonEQ"
+            android:layout_width="105dp"
+            android:layout_height="75dp"
+            android:background="@color/darkBlue"
+            android:text="=" />
+    </LinearLayout>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
