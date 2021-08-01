@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,15 +32,15 @@
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/buttonDEL"
-        android:layout_width="100dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="176dp"
-        android:background="@color/darkBlue"
-        android:text="DEL"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonDEL"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="75dp"-->
+<!--        android:layout_marginTop="176dp"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="DEL"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
 
     <Button
         android:id="@+id/button1"
@@ -60,59 +60,67 @@
         app:layout_constraintStart_toEndOf="@+id/button4"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-    <Button
-        android:id="@+id/buttonOFF"
-        android:layout_width="102dp"
-        android:layout_height="75dp"
-        android:background="@color/darkBlue"
-        android:text="OFF"
-        app:layout_constraintStart_toEndOf="@+id/buttonRESET"
-        app:layout_constraintTop_toTopOf="@+id/buttonRESET" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonOFF"-->
+<!--        android:layout_width="102dp"-->
+<!--        android:layout_height="75dp"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="OFF"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/buttonRESET"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonRESET" />-->
 
-    <Button
-        android:id="@+id/buttonEQ"
-        android:layout_width="107dp"
-        android:layout_height="73dp"
-        android:background="@color/darkBlue"
-        android:text="="
-        app:layout_constraintStart_toEndOf="@+id/button."
-        app:layout_constraintTop_toBottomOf="@+id/buttonPLUS" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonEQ"-->
+<!--        android:layout_width="107dp"-->
+<!--        android:layout_height="73dp"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="="-->
+<!--        app:layout_constraintStart_toEndOf="@+id/button."-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/buttonPLUS" />-->
 
-    <Button
-        android:id="@+id/button0"
-        android:layout_width="102dp"
-        android:layout_height="75dp"
-        android:background="@color/lightBlue"
-        android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/button00"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+<!--    <Button-->
+<!--        android:id="@+id/button0"-->
+<!--        android:layout_width="102dp"-->
+<!--        android:layout_height="75dp"-->
+<!--        android:background="@color/lightBlue"-->
+<!--        android:text="0"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/button00"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button8" />-->
 
-    <Button
-        android:id="@+id/buttonX"
-        android:layout_width="108dp"
-        android:layout_height="76dp"
-        android:background="@color/darkBlue"
-        android:text="X"
-        app:layout_constraintStart_toEndOf="@+id/buttonOFF"
-        app:layout_constraintTop_toTopOf="@+id/buttonOFF" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonX"-->
+<!--        android:layout_width="108dp"-->
+<!--        android:layout_height="76dp"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="X"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/buttonOFF"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonOFF" />-->
 
     <Button
         android:id="@+id/button7"
         android:layout_width="103dp"
         android:layout_height="75dp"
+        android:layout_alignTop="@+id/button8"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@+id/button8"
         android:background="@color/lightBlue"
         android:text="7"
         app:layout_constraintTop_toBottomOf="@+id/button4"
         tools:layout_editor_absoluteX="-3dp" />
 
-    <Button
-        android:id="@+id/button."
-        android:layout_width="102dp"
-        android:layout_height="74dp"
-        android:background="@color/lightBlue"
-        android:text="."
-        app:layout_constraintStart_toEndOf="@+id/button0"
-        app:layout_constraintTop_toBottomOf="@+id/button9" />
+<!--    <Button-->
+<!--        android:id="@+id/button."-->
+<!--        android:layout_width="102dp"-->
+<!--        android:layout_height="74dp"-->
+<!--        android:layout_below="@+id/button9"-->
+<!--        android:layout_alignEnd="@+id/button9"-->
+<!--        android:layout_marginTop="-1dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:background="@color/lightBlue"-->
+<!--        android:text="."-->
+<!--        app:layout_constraintStart_toEndOf="@+id/button0"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button9" />-->
 
     <Button
         android:id="@+id/button6"
@@ -123,41 +131,77 @@
         app:layout_constraintStart_toEndOf="@+id/button5"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
-    <Button
-        android:id="@+id/buttonDIVIDE"
-        android:layout_width="109dp"
-        android:layout_height="73dp"
-        android:background="@color/darkBlue"
-        android:text="÷"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/buttonX" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonDIVIDE"-->
+<!--        android:layout_width="109dp"-->
+<!--        android:layout_height="73dp"-->
+<!--        android:layout_alignTop="@+id/button3"-->
+<!--        android:layout_marginStart="-261dp"-->
+<!--        android:layout_marginTop="-364dp"-->
+<!--        android:layout_toEndOf="@+id/button3"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="÷" />-->
 
-    <Button
-        android:id="@+id/buttonMINUS"
-        android:layout_width="109dp"
-        android:layout_height="77dp"
-        android:background="@color/darkBlue"
-        android:text="-"
-        app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/buttonDIVIDE" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonMINUS"-->
+<!--        android:layout_width="109dp"-->
+<!--        android:layout_height="77dp"-->
+<!--        android:layout_below="@+id/buttonDIVIDE"-->
+<!--        android:layout_alignEnd="@+id/buttonDIVIDE"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:layout_marginEnd="1dp"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="-"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/button6"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/buttonDIVIDE" />-->
 
     <Button
         android:id="@+id/button4"
         android:layout_width="102dp"
         android:layout_height="74dp"
+        android:layout_marginEnd="0dp"
         android:background="@color/lightBlue"
         android:text="4"
         app:layout_constraintTop_toBottomOf="@+id/button1"
         tools:layout_editor_absoluteX="-2dp" />
 
-    <Button
-        android:id="@+id/buttonPLUS"
-        android:layout_width="107dp"
-        android:layout_height="76dp"
-        android:background="@color/darkBlue"
-        android:text="+"
-        app:layout_constraintStart_toEndOf="@+id/button9"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMINUS" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonPLUS"-->
+<!--        android:layout_width="109dp"-->
+<!--        android:layout_height="73dp"-->
+<!--        android:layout_below="@+id/buttonMINUS"-->
+<!--        android:layout_alignEnd="@+id/buttonMINUS"-->
+<!--        android:layout_marginTop="-3dp"-->
+<!--        android:layout_marginEnd="-1dp"-->
+<!--        android:layout_marginBottom="-1dp"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="+"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/button9"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/buttonMINUS" />-->
+
+    <!--    <Button-->
+<!--        android:id="@+id/button00"-->
+<!--        android:layout_width="103dp"-->
+<!--        android:layout_height="77dp"-->
+<!--        android:layout_below="@+id/button9"-->
+<!--        android:layout_marginTop="11dp"-->
+<!--        android:background="@color/lightBlue"-->
+<!--        android:text="00"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button7"-->
+<!--        tools:layout_editor_absoluteX="-3dp" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonRESET"-->
+<!--        android:layout_width="102dp"-->
+<!--        android:layout_height="75dp"-->
+<!--        android:layout_alignTop="@+id/buttonDEL"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginTop="1dp"-->
+<!--        android:layout_toEndOf="@+id/buttonDEL"-->
+<!--        android:background="@color/darkBlue"-->
+<!--        android:text="RESET"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/buttonDEL"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/buttonDEL" />-->
 
     <Button
         android:id="@+id/button8"
@@ -167,24 +211,6 @@
         android:text="8"
         app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-    <Button
-        android:id="@+id/button00"
-        android:layout_width="103dp"
-        android:layout_height="77dp"
-        android:background="@color/lightBlue"
-        android:text="00"
-        app:layout_constraintTop_toBottomOf="@+id/button7"
-        tools:layout_editor_absoluteX="-3dp" />
-
-    <Button
-        android:id="@+id/buttonRESET"
-        android:layout_width="102dp"
-        android:layout_height="75dp"
-        android:background="@color/darkBlue"
-        android:text="RESET"
-        app:layout_constraintStart_toEndOf="@+id/buttonDEL"
-        app:layout_constraintTop_toTopOf="@+id/buttonDEL" />
 
     <Button
         android:id="@+id/button2"
@@ -214,4 +240,4 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonOFF" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.widget.RelativeLayout>
