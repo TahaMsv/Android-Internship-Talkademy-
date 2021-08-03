@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">My Calculator</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_result">3</string>
+    <string name="divider">÷</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="Minus">-</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="plus">+</string>
+    <string name="_00">00</string>
+    <string name="_0">0</string>
+    <string name="dot">.</string>
+    <string name="equal">=</string>
+    <string name="_3">3</string>
+    <string name="del">DEL</string>
+    <string name="reset">RESET</string>
+    <string name="off">OFF</string>
+    <string name="x">X</string>
+    <string name="_8_0_5_0">8.0 - 5.0:</string>
 </resources>

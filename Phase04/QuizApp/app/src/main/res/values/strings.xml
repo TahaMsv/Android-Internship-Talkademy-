@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Quiz App</string>
+    <string name="incorrect_toast">Incorrect!</string>
+    <string name="question_text">This is a question</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgment_toast">Cheating is wrong.</string>
+<!--    <string name="question_text">Question</string>-->
+    <string name="true_button">Yes</string>
+    <string name="false_button">No</string>
+    <string name="next_button">Next ></string>
+</resources>
