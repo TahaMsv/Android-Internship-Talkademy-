@@ -12,16 +12,16 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    String QUESTION_KEY = "Question";
-    String ANSWER_KEY = "Answer";
-    int REQ_CODE = 1234;
-    TextView textView;
+    static String QUESTION_KEY = ".Question";
+    static String ANSWER_KEY = ".Answer";
+    private static int REQ_CODE = 1234;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-          textView= findViewById(R.id.question_text);
-        Button mCheatButton = (Button) findViewById(R.id.show_answer_button);
+        final TextView textView = findViewById(R.id.question_text);
+        Button mCheatButton = findViewById(R.id.show_answer_button);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,11 +37,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_CODE) {
-            if (resultCode == RESULT_OK) {
-                String answer = data.getStringExtra(ANSWER_KEY);
-                Toast.makeText(this, answer, Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == REQ_CODE && resultCode == RESULT_OK && data != null) {
+            String answer = data.getStringExtra(ANSWER_KEY);
+            Toast.makeText(this, answer, Toast.LENGTH_SHORT).show();
         }
     }
 }
