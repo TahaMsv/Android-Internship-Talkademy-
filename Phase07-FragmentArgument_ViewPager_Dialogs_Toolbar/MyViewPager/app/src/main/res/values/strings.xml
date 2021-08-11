@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My ViewPager</string>
+    <string name="setting">Setting</string>
+    <string name="asia">Asia</string>
+    <string name="africa">Africa</string>
+    <string name="europe">Europe</string>
+    <string name="america">America</string>
+    <string name="australia">Australia</string>
+</resources>

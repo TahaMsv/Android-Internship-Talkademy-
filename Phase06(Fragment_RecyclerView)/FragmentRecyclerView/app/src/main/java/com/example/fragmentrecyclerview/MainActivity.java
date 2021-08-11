@@ -17,5 +17,11 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment, myFragment)
                 .commit();
 
+        MyFragment myFragment3 = new MyFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment, myFragment3)
+                .commit();
+
     }
 }

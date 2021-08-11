@@ -21,8 +21,8 @@ import java.util.List;
 
 public class MyFragment extends Fragment {
 
+    public static final String TALKADEMY = "talkademy";
     EditText editText;
-    CheckBox checkBox;
     RecyclerView recyclerView;
     List<MyItem> list = new ArrayList<>();
     MyAdapter myAdapter;
@@ -30,15 +30,24 @@ public class MyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View viewRoot = inflater.inflate(R.layout.fragment_my, container, false);
-        editText = viewRoot.findViewById(R.id.editText);
-        checkBox = viewRoot.findViewById(R.id.checkBox);
-        recyclerView = viewRoot.findViewById(R.id.recyclerView);
+        return inflater.inflate(R.layout.fragment_my, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        editText = view.findViewById(R.id.editText);
+        final CheckBox checkBox = view.findViewById(R.id.checkBox);
+        recyclerView = view.findViewById(R.id.recyclerView);
         myAdapter = new MyAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myAdapter);
-        editText.addTextChangedListener(new TextWatcher() {
+        editText.addTextChangedListener(getWatcher(checkBox));
+    }
+
+    private TextWatcher getWatcher(final CheckBox checkBox) {
+        return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -46,13 +55,13 @@ public class MyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (checkBox.isChecked()) {
-                    String title = editText.getText().toString().trim();
-                    if ("talkademy".equals(title)) {
-                        list.add(new MyItem(title));
-                        System.out.println(title);
-                        myAdapter.notifyItemInserted(list.size() - 1);
-                    }
+                if (!checkBox.isChecked()) return;
+
+                String title = editText.getText().toString().trim();
+                if (TALKADEMY.equals(title)) {
+                    list.add(new MyItem(title));
+                    System.out.println(title);
+                    myAdapter.notifyItemInserted(list.size() - 1);
                 }
             }
 
@@ -60,10 +69,6 @@ public class MyFragment extends Fragment {
             public void afterTextChanged(Editable s) {
 
             }
-        });
-
-        return viewRoot;
-
-
+        };
     }
 }
