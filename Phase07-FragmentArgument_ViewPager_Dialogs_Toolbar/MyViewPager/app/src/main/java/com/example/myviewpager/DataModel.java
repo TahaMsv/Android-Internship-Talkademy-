@@ -145,7 +145,7 @@ class DataModel {
         return listToReturn;
     }
 
-    CountryModel getCountry(String id) {
+    public static CountryModel getCountry(String id) {
         return allCountries.get(id);
     }
 }
