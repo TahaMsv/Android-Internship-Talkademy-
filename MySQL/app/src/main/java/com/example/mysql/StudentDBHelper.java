@@ -15,7 +15,7 @@ import java.util.List;
 public class StudentDBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "student-db";
     private static final int DB_VERSION = 1;
-    private static String TABLE_STUDENTS = "tb_students";
+    public static final String TABLE_STUDENTS = "tb_students";
     private String CMD = "CREATE TABLE IF NOT EXISTS '" + TABLE_STUDENTS + "'( '" +
             StudentModel.KEY_NAME + "' TEXT, '" +
             StudentModel.KEY_LAST_NAME + "' TEXT, '" +
@@ -167,5 +167,7 @@ public class StudentDBHelper extends SQLiteOpenHelper {
         }
         return returnedList;
     }
+
+
 
 }

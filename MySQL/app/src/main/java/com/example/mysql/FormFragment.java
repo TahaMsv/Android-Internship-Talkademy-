@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 public class FormFragment extends Fragment {
     public static FormFragment newInstance() {
@@ -35,7 +36,8 @@ public class FormFragment extends Fragment {
         final EditText scoreET = view.findViewById(R.id.editTextScore);
         final RadioGroup radioGroup = view.findViewById(R.id.radio_group);
         final StudentDBHelper dbHelper = new StudentDBHelper(getContext());
-
+        final StudentDataBase db = Room.databaseBuilder(getContext(),
+                StudentDataBase.class, StudentDataBase.DB_NAME).allowMainThreadQueries().build();
 
         String editOrAdd = "";
         String student_code = "";
@@ -44,13 +46,32 @@ public class FormFragment extends Fragment {
             student_code = getArguments().getString(FirstFragment.STUDENT_CODE);
         }
         if (FirstFragment.EDIT.equals(editOrAdd)) {
-            StudentModel studentModel = dbHelper.getStudentByCode(student_code);
-            nameET.setText(studentModel.getName());
-            lastNameET.setText(studentModel.getLastName());
-            codeET.setText(studentModel.getCode());
+            String name = "";
+            String lastName = "";
+            String code = "";
+            double score = 0;
+            String gender = "";
+
+            if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                StudentModel studentModel = dbHelper.getStudentByCode(student_code);
+                name = studentModel.getName();
+                lastName = studentModel.getLastName();
+                code = studentModel.getCode();
+                score = studentModel.getScore();
+                gender = studentModel.getGender();
+            } else {
+                StudentEntity students = db.studentDao().getStudentByCode(student_code);
+                name = students.getName();
+                lastName = students.getLastName();
+                code = students.getCode();
+                score = students.getScore();
+                gender = students.getGender();
+            }
+            nameET.setText(name);
+            lastNameET.setText(lastName);
+            codeET.setText(code);
             codeET.setEnabled(false);
-            scoreET.setText(String.valueOf(studentModel.getScore()));
-            String gender = studentModel.getGender();
+            scoreET.setText(String.valueOf(score));
             if (StudentModel.KEY_GENDER_MAlE.equals(gender)) {
                 RadioButton male_radio = view.findViewById(R.id.radioButton_male);
                 male_radio.setChecked(true);
@@ -75,14 +96,33 @@ public class FormFragment extends Fragment {
                 RadioButton rb = view.findViewById(radioBtnId);
                 gender = StudentModel.KEY_GENDER_MAlE.equals(rb.getText().toString()) ? StudentModel.KEY_GENDER_MAlE : StudentModel.KEY_GENDER_FEMALE;
                 StudentModel studentModel = new StudentModel(name, lastName, code, Double.parseDouble(score), gender);
-                boolean isExisted = dbHelper.findStudentByCode(code);
+                StudentEntity studentEntity = new StudentEntity(name, lastName, code, Double.parseDouble(score), gender);
+                boolean isExisted = false;
+                if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                    isExisted = dbHelper.findStudentByCode(code);/////Todo
+                } else {
+                    StudentEntity student = db.studentDao().findStudentByCode(code);
+                    isExisted = student != null;
+                }
+
                 if (FirstFragment.EDIT.equals(finalEditOrAdd)) {
-                    dbHelper.updateStudent(studentModel);
+                    if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                        dbHelper.updateStudent(studentModel);
+                    } else {
+                        db.studentDao().updateStudent(studentEntity);
+                    }
+
                 } else {
                     if (isExisted) {
                         Toast.makeText(getContext(), "Student already exist", Toast.LENGTH_LONG).show();
                     } else {
-                        dbHelper.addStudent(studentModel);
+                        if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                            dbHelper.addStudent(studentModel);
+                        } else {
+
+                            db.studentDao().insertStudent(studentEntity);
+                        }
+
                     }
                 }
 

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +21,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static final String DELETE = "Delete";
     public static final String EDIT = "Edit";
-    
-    private List<StudentModel> myList;
 
-    public MyAdapter(List<StudentModel> items) {
-        if (items == null) {
-            this.myList = new ArrayList<>();
+    private List<StudentModel> myList;
+    private List<StudentEntity> myList_room;
+
+    public MyAdapter(List<StudentModel> items, List<StudentEntity> items_room) {
+        if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+            if (items == null) items = new ArrayList<>();
+            else this.myList = items;
+        } else {
+            if (items == null) items_room = new ArrayList<>();
+            else this.myList_room = items_room;
         }
-        this.myList = items;
     }
 
     @NonNull
@@ -47,8 +52,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, DELETE,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                StudentDBHelper dbHelper = new StudentDBHelper(holder.itemView.getContext());
-                                dbHelper.deleteStudent(myList.get(position).getCode());
+                                if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                                    StudentDBHelper dbHelper = new StudentDBHelper(holder.itemView.getContext());
+                                    dbHelper.deleteStudent(myList.get(position).getCode());
+                                } else {
+                                    final StudentDataBase db = Room.databaseBuilder(holder.itemView.getContext(),
+                                            StudentDataBase.class, StudentDataBase.DB_NAME).allowMainThreadQueries().build();
+                                    db.studentDao().deleteStudent(myList_room.get(position));
+                                }
+
                                 myList.remove(position);
                                 notifyItemChanged(position);
                                 dialog.dismiss();
@@ -61,7 +73,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                                 FormFragment formFragment = new FormFragment();
                                 Bundle bundle = new Bundle();
                                 bundle.putString(FirstFragment.ADD_OR_EDIT, FirstFragment.EDIT);
-                                bundle.putSerializable(FirstFragment.STUDENT_CODE, myList.get(position).getCode());
+                                if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                                    bundle.putSerializable(FirstFragment.STUDENT_CODE, myList.get(position).getCode());
+                                } else {
+                                    bundle.putSerializable(FirstFragment.STUDENT_CODE, myList_room.get(position).getCode());
+                                }
                                 formFragment.setArguments(bundle);
                                 activity.getSupportFragmentManager()
                                         .beginTransaction()
@@ -76,12 +92,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 return true;
             }
         });
-        holder.bind(myList.get(position));
+        if(MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+
+        }else {
+            holder.bind(myList_room.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return myList.size();
+        if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+            return myList.size();
+        }
+        return myList_room.size();
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -102,12 +125,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             title_gender = itemView.findViewById(R.id.textView_gender);
         }
 
-        public void bind(StudentModel myItem) {
-            title_name.setText(myItem.getName());
-            title_lastName.setText(myItem.getLastName());
-            title_code.setText(myItem.getCode());
-            title_score.setText(String.valueOf(myItem.getScore()));
-            title_gender.setText(String.valueOf(myItem.getGender()));
+        public void bind(Object myItem) {
+            if (myItem instanceof StudentModel) {
+                StudentModel studentModel = (StudentModel) myItem;
+                title_name.setText(studentModel.getName());
+                title_lastName.setText(studentModel.getLastName());
+                title_code.setText(studentModel.getCode());
+                title_score.setText(String.valueOf(studentModel.getScore()));
+                title_gender.setText(String.valueOf(studentModel.getGender()));
+            } else {
+                StudentEntity studentEntity = (StudentEntity) myItem;
+                title_name.setText(studentEntity.getName());
+                title_lastName.setText(studentEntity.getLastName());
+                title_code.setText(studentEntity.getCode());
+                title_score.setText(String.valueOf(studentEntity.getScore()));
+                title_gender.setText(String.valueOf(studentEntity.getGender()));
+            }
         }
 
     }
