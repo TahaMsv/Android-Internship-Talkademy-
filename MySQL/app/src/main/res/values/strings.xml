@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My SQL</string>
+    <string name="add_student">Add Student</string>
+    <string name="show_students">Show students</string>
+    <string name="name">Name:</string>
+    <string name="last_name">Last name</string>
+    <string name="code">Code</string>
+    <string name="score">Score</string>
+    <string name="gender">Gender:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="save">Save</string>
+</resources>
