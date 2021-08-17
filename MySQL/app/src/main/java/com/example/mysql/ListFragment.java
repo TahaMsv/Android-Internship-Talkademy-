@@ -110,8 +110,9 @@ public class ListFragment extends Fragment {
                     }
                     students_room.clear();
                     students_room.addAll(temp);
-                    myAdapter.notifyDataSetChanged();
+
                 }
+                myAdapter.notifyDataSetChanged();
             }
 
             @Override

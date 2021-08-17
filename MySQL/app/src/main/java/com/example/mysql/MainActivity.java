@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String SQLITE_OR_ROOM = "ROOM";
+    public static String SQLITE_OR_ROOM = "SQLITE";
     public static String SQLITE = "SQLITE";
     public static String ROOM = "ROOM";
 

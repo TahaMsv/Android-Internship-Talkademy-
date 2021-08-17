@@ -61,8 +61,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                                     db.studentDao().deleteStudent(myList_room.get(position));
                                 }
 
-                                myList.remove(position);
-                                notifyItemChanged(position);
+                                if (MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
+                                    myList.remove(position);
+                                    notifyItemRangeRemoved(0,myList.size());
+                                } else {
+                                    myList_room.remove(position);
+                                    notifyItemRangeRemoved(0,myList_room.size());
+                                }
+
+
                                 dialog.dismiss();
                             }
                         });
@@ -93,7 +100,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             }
         });
         if(MainActivity.SQLITE_OR_ROOM.equals(MainActivity.SQLITE)) {
-
+            holder.bind(myList.get(position));
         }else {
             holder.bind(myList_room.get(position));
         }
@@ -127,6 +134,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public void bind(Object myItem) {
             if (myItem instanceof StudentModel) {
+                System.out.println("here");
                 StudentModel studentModel = (StudentModel) myItem;
                 title_name.setText(studentModel.getName());
                 title_lastName.setText(studentModel.getLastName());
@@ -134,6 +142,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 title_score.setText(String.valueOf(studentModel.getScore()));
                 title_gender.setText(String.valueOf(studentModel.getGender()));
             } else {
+                System.out.println("here1");
                 StudentEntity studentEntity = (StudentEntity) myItem;
                 title_name.setText(studentEntity.getName());
                 title_lastName.setText(studentEntity.getLastName());
