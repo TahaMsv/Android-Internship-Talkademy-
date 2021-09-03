@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mvvm_DataBinding</string>
+    <string name="send">Send</string>
+    <string name="type_something">type something...</string>
+</resources>
