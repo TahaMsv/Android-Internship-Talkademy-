@@ -71,16 +71,16 @@ class DataModel {
 
         }};
         europeanCountries = new HashMap<String, CountryModel>() {{
-            put("5", new CountryModel("Spain", "5", Continent.Asia));
+            put("5", new CountryModel("Spain", "5", Continent.Europe));
         }};
         asianCountries = new HashMap<String, CountryModel>() {{
             put("6", new CountryModel("China", "6", Continent.Asia));
         }};
         africanCountries = new HashMap<String, CountryModel>() {{
-            put("7", new CountryModel("Egypt", "7", Continent.Asia));
+            put("7", new CountryModel("Egypt", "7", Continent.Africa));
         }};
         americanCountries = new HashMap<String, CountryModel>() {{
-            put("7", new CountryModel("Canada", "8", Continent.Asia));
+            put("7", new CountryModel("Canada", "8", Continent.America));
         }};
         australianCountries = new HashMap<String, CountryModel>() {{
             put("4", new CountryModel("Australia", "4", Continent.Australia));

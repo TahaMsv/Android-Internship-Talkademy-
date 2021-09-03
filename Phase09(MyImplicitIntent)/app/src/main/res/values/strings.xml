@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyImplicit Intent</string>
+    <string name="show_contacts">Show contacts</string>
+    <string name="load_contacts">Load contacts</string>
+</resources>

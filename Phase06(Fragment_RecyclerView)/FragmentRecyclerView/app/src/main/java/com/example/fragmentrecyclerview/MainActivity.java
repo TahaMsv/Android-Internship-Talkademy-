@@ -12,16 +12,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MyFragment myFragment = new MyFragment();
+        replaceFragment(myFragment, R.id.fragment);
+
+
+    }
+
+    private void replaceFragment(MyFragment myFragment, int layoutResId) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment, myFragment)
+                .replace(layoutResId, myFragment)
                 .commit();
-
-        MyFragment myFragment3 = new MyFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment, myFragment3)
-                .commit();
-
     }
 }

@@ -10,26 +10,25 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 
 public class SettingFragment extends Fragment {
 
-    DataModel dataModel;
+    public static SettingFragment newInstance() {
+        SettingFragment fragment = new SettingFragment();
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataModel = DataModel.getInstance();
+        DataModel dataModel = DataModel.getInstance();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View viewRoot = inflater.inflate(R.layout.fragment_setting, container, false);
-
-
-        return viewRoot;
+        return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
     @Override
@@ -50,63 +49,87 @@ public class SettingFragment extends Fragment {
         asiaCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    DataModel.addAsians();
-                } else {
-                    DataModel.removeAsians();
-                }
-                DataModel.setIsAsianAdded(isChecked);
+                handleCheckBoxes(Continent.Asia, isChecked);
             }
         });
 
         africaCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    DataModel.addAfricans();
-                } else {
-                    DataModel.removeAfricans();
-                }
-                DataModel.setIsAfricanAdded(isChecked);
+                handleCheckBoxes(Continent.Africa, isChecked);
+
             }
         });
 
         americaCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    DataModel.addAmericans();
-                } else {
-                    DataModel.removeAmericans();
-                }
-                DataModel.setIsAmericanAdded(isChecked);
+                handleCheckBoxes(Continent.America, isChecked);
+
             }
         });
 
         europeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    DataModel.addEuropeans();
-                } else {
-                    DataModel.removeEuropeans();
-                }
-                DataModel.setIsEuropeanAdded(isChecked);
+                handleCheckBoxes(Continent.Europe, isChecked);
+
             }
         });
 
         australiaCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                handleCheckBoxes(Continent.Australia, isChecked);
+            }
+        });
+
+
+    }
+
+    private void handleCheckBoxes(Continent continent, boolean isChecked) {
+
+        switch (continent) {
+            case Australia:
                 if (isChecked) {
                     DataModel.addAustralians();
                 } else {
                     DataModel.removeAustralians();
                 }
                 DataModel.setIsAustralianAdded(isChecked);
-            }
-        });
-
-
+                break;
+            case Asia:
+                if (isChecked) {
+                    DataModel.addAsians();
+                } else {
+                    DataModel.removeAsians();
+                }
+                DataModel.setIsAsianAdded(isChecked);
+                break;
+            case Africa:
+                if (isChecked) {
+                    DataModel.addAfricans();
+                } else {
+                    DataModel.removeAfricans();
+                }
+                DataModel.setIsAfricanAdded(isChecked);
+                break;
+            case Europe:
+                if (isChecked) {
+                    DataModel.addEuropeans();
+                } else {
+                    DataModel.removeEuropeans();
+                }
+                DataModel.setIsEuropeanAdded(isChecked);
+                break;
+            case America:
+                if (isChecked) {
+                    DataModel.addAmericans();
+                } else {
+                    DataModel.removeAmericans();
+                }
+                DataModel.setIsAmericanAdded(isChecked);
+                break;
+        }
     }
 }

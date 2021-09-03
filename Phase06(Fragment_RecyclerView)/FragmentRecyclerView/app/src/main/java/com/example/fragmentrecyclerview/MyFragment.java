@@ -20,12 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyFragment extends Fragment {
-
     public static final String TALKADEMY = "talkademy";
-    EditText editText;
-    RecyclerView recyclerView;
-    List<MyItem> list = new ArrayList<>();
-    MyAdapter myAdapter;
+    private List<MyItem> list = new ArrayList<>();
+    private EditText editText;
+    private MyAdapter myAdapter;
 
     @Nullable
     @Override
@@ -38,12 +36,16 @@ public class MyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         editText = view.findViewById(R.id.editText);
         final CheckBox checkBox = view.findViewById(R.id.checkBox);
-        recyclerView = view.findViewById(R.id.recyclerView);
+        setUpRecyclerView(view);
+        editText.addTextChangedListener(getWatcher(checkBox));
+    }
+
+    private void setUpRecyclerView(@NonNull View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         myAdapter = new MyAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myAdapter);
-        editText.addTextChangedListener(getWatcher(checkBox));
     }
 
     private TextWatcher getWatcher(final CheckBox checkBox) {

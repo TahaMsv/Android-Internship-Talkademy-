@@ -42,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatTextView title;
+        private AppCompatTextView title;
 
         MyViewHolder(View itemView) {
             super(itemView);

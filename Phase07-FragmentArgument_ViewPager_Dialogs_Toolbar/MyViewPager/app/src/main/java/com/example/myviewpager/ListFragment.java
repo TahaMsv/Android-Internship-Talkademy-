@@ -17,31 +17,20 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    List<CountryModel> list = new ArrayList<>();
-    MyAdapter myAdapter;
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
+    private List<CountryModel> list = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View viewRoot = inflater.inflate(R.layout.fragment_list, container, false);
-        return viewRoot;
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.recyclerView);
+         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         prepareData();
-        myAdapter = new MyAdapter(list);
+         MyAdapter myAdapter = new MyAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myAdapter);

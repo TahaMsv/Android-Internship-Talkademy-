@@ -9,10 +9,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    final static String COUNTRY_ID = "CountryID";
+    final static String COUNTRY_ID = "MainActivity.CountryID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +23,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
 
-        ListFragment listFragment = new ListFragment();
+        startFragment(new ListFragment());
+
+
+    }
+
+    private void startFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.my_placeHolder, listFragment)
+                .replace(R.id.my_placeHolder, fragment)
                 .commit();
-
-
     }
 
     @Override
@@ -40,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.setting_item) {
-            SettingFragment settingFragment = new SettingFragment();
+
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.my_placeHolder, settingFragment).addToBackStack(null)
+                    .replace(R.id.my_placeHolder, createSettingFragment()).addToBackStack(null)
                     .commit();
 
         }
@@ -58,5 +62,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    protected Fragment createSettingFragment() {
+        return SettingFragment.newInstance();
     }
 }

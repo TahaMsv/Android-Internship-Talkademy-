@@ -18,14 +18,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SecondActivity extends AppCompatActivity {
 
 
     private static final int NUM_PAGES = 3;
-    private ViewPager mPager;
-    private PagerAdapter pagerAdapter;
-    CountryModel countryModel;
+    private static final String CONTENT = "SecondActivity.Content";
+    public static final String OK = "SecondActivity.OK";
+    public static final String SAMPLE_MESSAGE = "SecondActivity.Sample message";
+    public static final String ALERT = "SecondActivity.Alert";
+    private CountryModel countryModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +49,11 @@ public class SecondActivity extends AppCompatActivity {
                 finish();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        ViewPager mPager = findViewById(R.id.pager);
+        PagerAdapter pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
 
 
@@ -61,18 +64,19 @@ public class SecondActivity extends AppCompatActivity {
             super(fm);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
             switch (position) {
                 case 0:
-                    bundle.putString("Content", countryModel.getId());
+                    bundle.putString(CONTENT, countryModel.getId());
                     break;
                 case 1:
-                    bundle.putString("Content", countryModel.getName());
+                    bundle.putString(CONTENT, countryModel.getName());
                     break;
                 case 2:
-                    bundle.putString("Content", countryModel.getContinent().toString());
+                    bundle.putString(CONTENT, countryModel.getContinent().name());
                     break;
 
             }
@@ -97,16 +101,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_favorite) {
-            AlertDialog alertDialog = new AlertDialog.Builder(SecondActivity.this).create();
-            alertDialog.setTitle("Alert");
-            alertDialog.setMessage("Sample message");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+            Utils.showNEUTRALAlertDialog(SecondActivity.this, ALERT, SAMPLE_MESSAGE, OK);
         }
 
         return super.onOptionsItemSelected(item);
