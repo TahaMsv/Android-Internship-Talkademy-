@@ -46,29 +46,10 @@ public class AppViewModel extends BaseObservable {
 
     public void onButtonClicked() {
 
-        Disposable subscribe = Observable.intervalRange(0L, 100L, 1, 1, TimeUnit.SECONDS,
-                AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long v) throws Exception {
-                        AppViewModel.this.setProgressPercentage(v.intValue());
-                    }
-                });
+//        Utility.increasePercentage1();
+        Utility.increasePercentage2();
 
 
-
-//        new Timer().scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//                int percentage = getProgressPercentage();
-//                if (percentage < 100) {
-//                    percentage++;
-//                    setProgressPercentage(percentage);
-//                    System.out.println(percentage);
-//                }
-//
-//            }
-//        }, 100, 1000);
     }
 
 
